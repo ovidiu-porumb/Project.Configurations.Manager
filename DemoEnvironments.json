@@ -1,0 +1,14 @@
+[
+    {
+        "MachineName": "SB070044LT",
+        "EnvironmentName": "Development"
+    },
+    {
+        "MachineName": "StagingMachineName",
+        "EnvironmentName": "Staging"
+    },
+    { 
+        "MachineName": "ProductionMachineName",
+        "EnvironmentName": "Production"
+    }
+]

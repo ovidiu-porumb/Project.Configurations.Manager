@@ -1,0 +1,41 @@
+[
+    {
+        "Common": {
+            "DatabaseServer": "localhost\\sql2012",
+            "LogFolder": "C:\\MyApplication\\Logs"
+        },
+        "MyProjectA": {
+            "LogFileName": "LogFileForMyProjectA"
+        },
+        "MyProjectB": {
+            "LogFileName": "LogFileForMyProjectB"
+        },
+        "EnvironmentName": "Development"
+    },
+    {
+        "Common": {
+            "DatabaseServer": "staging_machine_name\\sql2012",
+            "LogFolder": "D:\\StagingAppFolder\\MyApplication\\Logs"
+        },
+        "MyProjectA": {
+            "LogFileName": "LogFileForMyProjectA"
+        },
+        "MyProjectB": {
+            "LogFileName": "LogFileForMyProjectB"
+        },
+        "EnvironmentName": "Staging"
+    },
+    {
+        "Common": {
+            "DatabaseServer": "production_machine_name\\sql2012",
+            "LogFolder": "E:\\ProductionAppFolder\\MyApplication\\Logs"
+        },
+        "MyProjectA": {
+            "LogFileName": "LogFileForMyProjectA"
+        },
+        "MyProjectB": {
+            "LogFileName": "LogFileForMyProjectB"
+        },
+        "EnvironmentName": "Production"
+    }
+]
