@@ -1,0 +1,1 @@
+Project.Configurations.Manager
