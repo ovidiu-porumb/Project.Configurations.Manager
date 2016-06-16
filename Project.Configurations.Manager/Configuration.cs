@@ -5,15 +5,18 @@ using Project.Configurations.Manager.Exceptions;
 using Project.Configurations.Manager.Model;
 using Project.Configurations.Preconditions;
 
+// ReSharper disable InconsistentNaming
+// ReSharper disable ParameterHidesMember
+
 namespace Project.Configurations.Manager
 {
     public class Configuration<T> where T : ConfigurationModelBase
     {
-        private string _configurationFileContent;
+        private string configurationFileContent;
         
         public T Load(string configurationFileContent, string environmentName)
         {
-            _configurationFileContent = configurationFileContent;
+            this.configurationFileContent = configurationFileContent;
 
             var preconditionsHandler = new PreconditionsHandler();
             preconditionsHandler.AssesThatIsMet(EnvironmentIsConfigured, environmentName, new EnvironmentConfigurationNotFoundException());
@@ -26,12 +29,12 @@ namespace Project.Configurations.Manager
 
         public bool EnvironmentIsConfigured(string environmentName)
         {
-            return _configurationFileContent.Contains(environmentName);
+            return configurationFileContent.Contains(environmentName);
         }
 
         private List<T> DeserializeConfiguration()
         {
-            return JsonConvert.DeserializeObject<List<T>>(_configurationFileContent);
+            return JsonConvert.DeserializeObject<List<T>>(configurationFileContent);
         }
     }
 }

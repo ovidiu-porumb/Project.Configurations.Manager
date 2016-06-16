@@ -4,13 +4,15 @@ using Project.Configurations.Manager.Exceptions;
 using Project.Configurations.Manager.Model;
 using Project.Configurations.Preconditions;
 
+// ReSharper disable RedundantAssignment
+// ReSharper disable InconsistentNaming
 // ReSharper disable StaticMemberInGenericType
 
 namespace Project.Configurations.Manager
 {
     public static class ProjectConfiguration<T> where T : ConfigurationModelBase
     {
-        private static ConfigurationSource _configurationSource;
+        private static ConfigurationSource configurationSource;
 
         public static T Data { get; private set; }
         public static string EnvironmentName { get; private set; }
@@ -26,36 +28,36 @@ namespace Project.Configurations.Manager
         private static void SetupConfigurationSource(string configurationFilePath, string environmentFilePath)
         {
             var preconditionsHandler = new PreconditionsHandler();
-            preconditionsHandler.AssesThatIsMet(ConfigurationIsLoadedForTheFirstTime, _configurationSource, new ConfigurationHasBeenLoadedAlready());
+            preconditionsHandler.AssesThatIsMet(ConfigurationIsLoadedForTheFirstTime, configurationSource, new ConfigurationHasBeenLoadedAlready());
 
-            _configurationSource = new ConfigurationSource
+            configurationSource = new ConfigurationSource
             {
                 ConfigurationFilePath = configurationFilePath,
                 EnvironmentFilePath = environmentFilePath
             };
         }
 
-        private static bool ConfigurationIsLoadedForTheFirstTime(ConfigurationSource configurationSource)
+        private static bool ConfigurationIsLoadedForTheFirstTime(ConfigurationSource source)
         {
-            return configurationSource == null;
+            return source == null;
         }
 
         private static void LoadEnvironmentName()
         {
             var preconditionsHandler = new PreconditionsHandler();
-            preconditionsHandler.AssesThatIsMet(File.Exists, _configurationSource.EnvironmentFilePath, new EnvironmentFileNotFoundException());
+            preconditionsHandler.AssesThatIsMet(File.Exists, configurationSource.EnvironmentFilePath, new EnvironmentFileNotFoundException());
 
             var environment = new Environment();
-            EnvironmentName = environment.Load(GetFileContent(_configurationSource.EnvironmentFilePath));
+            EnvironmentName = environment.Load(GetFileContent(configurationSource.EnvironmentFilePath));
         }
 
         private static void LoadConfiguration()
         {
             var preconditionsHandler = new PreconditionsHandler();
-            preconditionsHandler.AssesThatIsMet(File.Exists, _configurationSource.ConfigurationFilePath, new ConfigurationFileNotFoundException());
+            preconditionsHandler.AssesThatIsMet(File.Exists, configurationSource.ConfigurationFilePath, new ConfigurationFileNotFoundException());
 
             Configuration<T> configuration = new Configuration<T>();
-            Data = configuration.Load(GetFileContent(_configurationSource.ConfigurationFilePath), EnvironmentName);
+            Data = configuration.Load(GetFileContent(configurationSource.ConfigurationFilePath), EnvironmentName);
         }
 
         private static string GetFileContent(string filePath)
