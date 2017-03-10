@@ -119,7 +119,7 @@ The way that this library solves this predicament is:
     }
 ]
 ```
-2.* and that's it! Use the mapped environment name in the configuration file*
+2.** and that's it! Use the mapped environment name in the configuration file**
 
 Project.Configurations.Manager will check the machine name where it runs and then, based on that info, will choose the appropriate configuration set from the json file. 
 For example, if I ran the application on the machine **MySuperPC** which is maped in the demo project to the **Development** environment, the following configurations were selected at runtime:
